@@ -1,5 +1,7 @@
 http://35.200.216.245:8080 #jenkins URL
 
+http://35.200.216.245:9000/ #sonarqube
+
 
 Groovy Code:-
 #!/usr/bin/env groovy
