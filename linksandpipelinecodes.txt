@@ -1,0 +1,40 @@
+http://35.200.216.245:8080 #jenkins URL
+
+
+Groovy Code:-
+#!/usr/bin/env groovy
+import hudson.model.*
+import hudson.EnvVars
+import groovy.json.JsonSlurperClassic
+import groovy.json.JsonBuilder
+import groovy.json.JsonOutput
+import java.net.URL
+
+node {
+    stage('pull code from git')
+    git 'https://github.com/amitpalanpure/CI-with-Jenkins-in-AWS-Demo.git'
+
+    stage('CS_Complie'){
+    withMaven(maven:'maven'){
+        sh 'mvn compile'
+        }
+    }
+
+    stage('CS_Test'){
+    withMaven(maven:'maven'){
+        sh 'mvn test'
+        }
+    }
+
+    stage('CS_Package'){
+    withMaven(maven:'maven'){
+        sh 'mvn package'
+        }
+    }
+
+    stage('CS_SonarQube') {
+   withMaven(maven:'maven'){
+        sh 'mvn sonar:sonar -D.sonar.host.url=http://35.200.216.245:9000'
+        }
+}
+}  
