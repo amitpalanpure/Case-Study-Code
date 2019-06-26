@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: cs-deplyoment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: csimage
+    spec:
+      containers:
+      - name: cs-container
+        image: amitpalanpure/csimage:8
+        ports:
+        - containerPort: 8080
